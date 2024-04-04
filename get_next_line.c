@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 10:54:24 by pmorello          #+#    #+#             */
-/*   Updated: 2024/03/30 14:06:03 by pmorello         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:25:32 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,9 @@ char    *get_next_line(int fd)
     if (!linea)
         return (NULL);
     //buffer - ft_nova_linea(buffer);  
+}
+
+int main()
+{
+    
 }

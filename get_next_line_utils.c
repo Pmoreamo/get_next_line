@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 12:13:58 by pmorello          #+#    #+#             */
-/*   Updated: 2024/03/30 14:06:06 by pmorello         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:24:25 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,3 +79,9 @@ char    *ft_llegir_linea(char *buffer)
     }
     return (new_buffer);
 }
+
+char    *ft_nova_linea(char *buffer)
+{
+
+}
+
