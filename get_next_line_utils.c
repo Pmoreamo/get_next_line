@@ -6,18 +6,50 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 12:13:58 by pmorello          #+#    #+#             */
-/*   Updated: 2024/04/02 14:24:25 by pmorello         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:44:55 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char    ft_strlen(char *buffer)
+{
+    size_t i;
+
+    i = 0;
+    while(buffer[i] != '\0')
+    {
+        i++;
+    }
+    return (i);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while ((char)s[i] != '\0')
+	{
+		if ((char)s[i] == (char) c)
+		{
+			return (&((char *)s)[i]);
+		}
+		i++;
+	}
+	if ((char)c == '\0')
+	{
+		return (&((char *)s)[i]);
+	}
+	return (0);
+}
 
 char    *ft_llegir_fd(int fd, char *buffer)
 
 {
     char    *new_buffer;
     int     b_llegits;
-    int     i;
+    int     i; 
 
     new_buffer = (char *)malloc(sizeof(char)*(BUFFER_SIZE + 1));
     if(!new_buffer)
@@ -25,7 +57,7 @@ char    *ft_llegir_fd(int fd, char *buffer)
 
     i = -1;
     b_llegits = 1;
-    while (b_llegits > 0 && buffer[++i] != '\n')
+    while (b_llegits > 0 && !ft_strchr(buffer, '\n'))
     {
         b_llegits = read(fd, buffer, BUFFER_SIZE);
         if (b_llegits > 0)
@@ -82,6 +114,25 @@ char    *ft_llegir_linea(char *buffer)
 
 char    *ft_nova_linea(char *buffer)
 {
+    char    *new_buffer;
+    size_t  i;
 
+    i = 0;
+
+    new_buffer = (char *)malloc(sizeof(char)*(i + 1));
+
+    if (!new_buffer)
+        return (NULL);
+
+    while(buffer[i] != '\0' && buffer[i] != '\n')
+    {
+        i++;
+        for (size_t j = 0; j < i; j++)
+        {
+            new_buffer[j] = buffer[j];
+            new_buffer[i] = '\0';
+        }
+    }
+    return (new_buffer);
 }
 
