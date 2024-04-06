@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 10:55:47 by pmorello          #+#    #+#             */
-/*   Updated: 2024/04/04 13:30:35 by pmorello         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:36:36 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@
 #include <stdlib.h>
 
 //funcions
-char    *get_next_line(int fd);
+char    get_next_line(int fd);
 char    *ft_strchr(const char *s, int c);
-char    *ft_llegir_fd(int fd, char *buffer);
-char    *ft_llegir_linea(char *buffer);
-char    *ft_nova_linea(char *buffer);
-
+size_t  ft_strlen(const char *s);
 
 #endif
