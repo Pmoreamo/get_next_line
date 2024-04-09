@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 10:54:24 by pmorello          #+#    #+#             */
-/*   Updated: 2024/04/09 11:51:26 by pmorello         ###   ########.fr       */
+/*   Updated: 2024/04/09 13:46:38 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ char	*get_next_line(int fd)
     line = ft_llegir_linea(buffer);
     if(line)
         return(NULL);
-    //buffer = ft_resta_fd //actualitza el buffer, un cop extret la linea, retorna la resta de la cadena
-    //  if(!buffer)
-    //      return(NULL);
-    // return (line); /retorn la linea extreta del buffer 
+    buffer = ft_resta_fd(buffer);
+    if(!buffer)
+        return(NULL);
+    return (line); 
     
     //ft_llegir_fd, llegir dades del buffer
     //ft_llegir_linea, extrau una linea del buffer i retorna la linea
