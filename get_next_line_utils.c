@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 12:13:58 by pmorello          #+#    #+#             */
-/*   Updated: 2024/04/04 14:36:10 by pmorello         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:51:16 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,52 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
+char	*ft_strjoin(char const *buffer, char const *new_buffer)
+{
+	char	*str;
+	size_t	i;
+	size_t	j;
+
+	str = (char *)malloc(sizeof(*buffer) * (ft_strlen(buffer) + ft_strlen(new_buffer) + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (buffer[i])
+	{
+		str[j++] = buffer[i];
+		i++;
+	}
+	i = 0;
+	while (new_buffer[i])
+	{
+		str[j++] = new_buffer[i];
+		i++;
+	}
+	str[j] = 0;
+	return (str);
+}
+
+char	*ft_llegir_linea(char *buffer)
+{
+	char	*line;
+	int		i;
+	size_t	length;
+	
+	line = (char *)malloc(sizeof(char)*(BUFFER_SIZE + 1));
+	if(!line)
+		return (NULL);
+
+	i = -1;
+	while(buffer[++i] != '\n')
+	{
+		line[i] = buffer[i];
+	}
+	line[i] = '\0';
+	return (line);
+}
+
+char	*ft_resta_fd(char *buffer)
+{
+
+}
