@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 10:55:47 by pmorello          #+#    #+#             */
-/*   Updated: 2024/04/09 13:43:38 by pmorello         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:48:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <fcntl.h>
 
 //funcions
-size_t  ft_strlen(const char *s);
-char    *get_next_line(int fd);
-char    *ft_strchr(const char *s, int c);
+size_t  ft_strlen(char *str);
+char    *ft_strchr(char *buffer, int c);
 char    *ft_strjoin(char *buffer, char *new_buffer);
+char    *get_next_line(int fd),
 char    *ft_llegir_linea(char *buffer);
 char    *ft_resta_fd(char *buffer);
 

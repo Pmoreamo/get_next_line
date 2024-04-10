@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <pmorello@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 10:54:24 by pmorello          #+#    #+#             */
-/*   Updated: 2024/04/09 13:46:38 by pmorello         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:31:11 by pmorello           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char    ft_llegir_fd(int fd, char *buffer)
+char    *ft_llegir_fd(int fd, char *buffer)
 {
     char    *new_buffer;
     int     b_llegits;
@@ -57,3 +57,23 @@ char	*get_next_line(int fd)
     //ft_llegir_linea, extrau una linea del buffer i retorna la linea
     //ft_resta_fd, un cop extrau la linea segueix llegint del fd fins al final. 
 }
+
+/*int main()
+{
+    int fd;
+    
+    fd = open("archivo.txt", O_RDONLY);
+    if (fd == -1) 
+    {
+        perror("Error al abrir el archivo");
+        return 1;
+    }
+    char *line;
+    while ((line = get_next_line(fd)) != NULL) 
+    {
+        printf("%s\n", line);
+        free(line);
+    }
+    close(fd);
+    return 0;
+}*/
