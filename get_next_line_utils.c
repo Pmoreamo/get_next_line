@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 12:13:58 by pmorello          #+#    #+#             */
-/*   Updated: 2024/04/09 13:48:53 by pmorello         ###   ########.fr       */
+/*   Updated: 2024/04/10 10:35:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,65 +46,67 @@ char	ft_strchr(const char *s, int c)
 
 char	ft_strjoin(char const *buffer, char const *new_buffer)
 {
-	char	*str;
 	size_t	i;
 	size_t	j;
+	char suma_buffer;
 
-	str = (char *)malloc(sizeof(*buffer) * (ft_strlen(buffer) + ft_strlen(new_buffer) + 1));
-	if (!str)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (buffer[i])
+	if(!buffer) //si falla el buffer
 	{
-		str[j++] = buffer[i];
-		i++;
+		buffer = malloc(sizeof(char)); //creem un malloc on guardar la info del buffer
+		if (!buffer) // comprovem que funcioni, si falla tornar null
+			free(buffer); //alliberem la memoria
+			buffer = NULL; //assignem NULL
+			return (NULL); //tornem NULL
 	}
-	i = 0;
-	while (new_buffer[i])
+	i = ft_strlen(buffer) + ft_strlen(new_buffer); // a i li donem valor del tamany de la suma de legnth dels 2 buffers
+	suma_buffer = (char *)malloc(sizeof(char)*(i + 1)); //creem una reserva de memoria del tamany de char * (lenght dels 2 buffer) + 1
+	if (!suma_buffer) //si falla la memo
 	{
-		str[j++] = new_buffer[i];
-		i++;
+		free(suma_buffer) //alliberar la memo
+		suma_buffer = NULL; // assignar null
+		return (NULL); //retornar null
 	}
-	str[j] = 0;
-	return (str);
+
+	i = -1; //reitera en el buffer i sumar buffer
+	j = 0; //reitera en el new_buffer
+	while (buffer[++i] != '\0')
+		suma_buffer[i] = buffer[i]
+	while(new_buffer[j] != '\0')
+		suma_buffer[i++] = new_buffer[j++];
+	suma_buffer[i] = '\0'; //afegim null al ultim char del suma_buffer
+	free(buffer);
+	return(suma_buffer); //tornem la suma dels 2 buffers. 
 }
 
 char	ft_llegir_linea(char *buffer) //quan es trobi linea, copiar linea
 {
 	char	*line;
-	int		i;
-		
-	line = (char *)malloc(sizeof(char)*(BUFFER_SIZE + 1));
-	if(!line)
-		return (NULL);
-
-	i = -1;
-	while(buffer[++i] != '\n')
-	{
-		line[i] = buffer[i];
-	}
-	line[i] = '\0';
-	free(line);
-	return (line);
-}
-
-char	ft_resta_fd(char *buffer) //si no es troba lnea, copiar el contingut restant al buffer
-{
-	
-	char	*resta;
-	int		i;
-
-	resta = (char *)malloc(sizeof(char)*(BUFFER_SIZE + 1));
-	if (!resta)
-		return (NULL);
+	size_t	i;
 	
 	i = 0;
-	while(i < BUFFER_SIZE && buffer[i] != '\0')
+	while(buffer[i++] != '\0') // reiterem en el buffer fins al null
 	{
-		resta[i] = buffer[i];
-		i++;
+		if (buffer[i] == '\n') //si troba salt de linea
+			break; //para el loop
 	}
-	resta[i] = '\0';
-	return (resta);
+	line = (char *)malloc(sizeof(char)*(BUFFER_SIZE + 1)); //crear una reserva de memoria tipus char, tamany de char * buffer_size + 1
+	if (!line)
+		return (NULL);
+	i = -1;
+	while (buffer[++i] != '\0' && buffer[i] != '\n') // mentres el buffer no sigui igual al null o salt de linea
+	{
+		line[i] = buffer[i]; //copiem la info del buffer a la linea(malloc)
+	}
+	if (buffer[i] = '\n') //si es troba salt de linea
+		line[i++] = '\n'; //copiar el salt de linea al malloc
+	line[i] = '\0'; //afegir el null al malloc
+	return (line); //retorn el valor de line, que sera una linea del buffer
+}
+
+char	ft_resta_fd(char *buffer) //si no es troba linea, copiar el contingut restant al buffer
+{
+	char	*resta;
+	size_t	i;
+
+
 }
