@@ -3,115 +3,116 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <pmorello@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lprieto- <lprieto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/30 12:13:58 by pmorello          #+#    #+#             */
-/*   Updated: 2024/04/10 11:29:00 by pmorello           ###   ########.fr       */
+/*   Created: 2023/11/11 11:29:54 by lprieto-          #+#    #+#             */
+/*   Updated: 2023/11/24 09:44:54 by lprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t  ft_strlen(char *str)
+static size_t	ft_strlen(char *str)
 {
-    size_t i;
+	size_t	len;
 
-    i = 0; 
-    while(s[i] != '\0') 
-    {
-        i++;
-    }
-    return (i);
+	if (!str)
+		return (free(str), str = NULL, 0);
+	len = 0;
+	while (str[len] != '\0')
+		len++;
+	return (len);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *buffer, int c)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while ((char)s[i] != '\0')
+	if (!buffer)
+		return (free(buffer), buffer = NULL, NULL);
+	while (buffer[i] != '\0')
 	{
-		if ((char)s[i] == (char) c)
-		{
-			return (&((char *)s)[i]);
-		}
+		if (buffer[i] == (char)c)
+			return ((char *)&buffer[i]);
 		i++;
 	}
-	if ((char)c == '\0')
-	{
-		return (&((char *)s)[i]);
-	}
+	if (buffer[i] == (unsigned char) c)
+		return ((char *) &buffer[i]);
 	return (0);
 }
 
-char	*ft_strjoin(char const *buffer, char const *new_buffer)
+char	*ft_strjoin(char *buffer, char *new_buffer)
 {
 	size_t	i;
 	size_t	j;
-	char suma_buffer;
+	char	*join_buffer;
 
-	if(!buffer) //si falla el buffer
+	if (!buffer)
 	{
-		buffer = malloc(sizeof(char)); //creem un malloc on guardar la info del buffer
-		if (!buffer) // comprovem que funcioni, si falla tornar null
-			return(free(buffer), buffer = NULL, NULL);
+		buffer = malloc(sizeof(char));
+		if (!buffer)
+			return (free(buffer), buffer = NULL, NULL);
+		buffer[0] = '\0';
 	}
-	i = ft_strlen(buffer) + ft_strlen(new_buffer); // a i li donem valor del tamany de la suma de legnth dels 2 buffers
-	suma_buffer = (char *)malloc(sizeof(char)*(i + 1)); //creem una reserva de memoria del tamany de char * (lenght dels 2 buffer) + 1
-	if (!suma_buffer) //si falla la memo
-		return(free(suma_buffer), suma_buffer = NULL, NULL);
-
-	i = -1; //reitera en el buffer i sumar buffer
-	j = 0; //reitera en el new_buffer
+	if (!new_buffer)
+		return (free(new_buffer), new_buffer = NULL, NULL);
+	i = ft_strlen(buffer) + ft_strlen(new_buffer);
+	join_buffer = malloc(sizeof(char) * (i + 1));
+	if (!join_buffer)
+		return (free(buffer), buffer = NULL, NULL);
+	i = -1;
+	j = 0;
 	while (buffer[++i] != '\0')
-		suma_buffer[i] = buffer[i]
-	while(new_buffer[j] != '\0')
-		suma_buffer[i++] = new_buffer[j++];
-	suma_buffer[i] = '\0'; //afegim null al ultim char del suma_buffer
-	return(free(buffer),suma_buffer); //tornem la suma dels 2 buffers. 
+		join_buffer[i] = buffer [i];
+	while (new_buffer[j] != '\0')
+		join_buffer[i++] = new_buffer[j++];
+	return (join_buffer[i] = '\0', free(buffer), join_buffer);
 }
 
-char	*ft_llegir_linea(char *buffer) //quan es trobi linea, copiar linea
+char	*ft_read_line(char *buffer)
 {
-	char	*line;
 	size_t	i;
-	
+	char	*new_buffer;
+
+	if (!buffer[0])
+		return (NULL);
 	i = 0;
-	while(buffer[i++] != '\0') // reiterem en el buffer fins al null
+	while (buffer[i] != '\0')
 	{
-		if (buffer[i] == '\n') //si troba salt de linea
-			break; //para el loop
+		if (buffer[i++] == '\n')
+			break ;
 	}
-	line = (char *)malloc(sizeof(char)*(BUFFER_SIZE + 1)); //crear una reserva de memoria tipus char, tamany de char * buffer_size + 1
-	if (!line)
+	new_buffer = malloc(sizeof(char) * (i + 1));
+	if (!new_buffer)
 		return (NULL);
 	i = -1;
-	while (buffer[++i] != '\0' && buffer[i] != '\n') // mentres el buffer no sigui igual al null o salt de linea
-		line[i] = buffer[i]; //copiem la info del buffer a la linea(malloc)
-	if (buffer[i] = '\n') //si es troba salt de linea
-		line[i++] = '\n'; //copiar el salt de linea al malloc
-	line[i] = '\0'; //afegir el null al malloc
-	return (line); //retorn el valor de line, que sera una linea del buffer
+	while (buffer[++i] != '\0' && buffer[i] != '\n')
+		new_buffer[i] = buffer[i];
+	if (buffer[i] == '\n')
+		new_buffer[i++] = '\n';
+	new_buffer[i] = '\0';
+	return (new_buffer);
 }
 
-char	*ft_resta_fd(char *buffer) //si no es troba linea, copiar el contingut restant al buffer
+char	*ft_new_line(char *buffer)
 {
-	char	*resta;
 	size_t	i;
-	size_t 	J;
+	size_t	j;
+	char	*new_buffer;
 
 	i = 0;
-	while (buffer[i] != '\0' && buffer[i] != '\n') //reiterem dins del buffer, fins a trobar el NULL o un salt de linea
+	while (buffer[i] != '\0' && buffer[i] != '\n')
 		i++;
 	if (!buffer[i])
 		return (free(buffer), buffer = NULL, NULL);
-	resta = (char *)malloc(sizeof(char)*(BUFFER_SIZE + 1)); //creem una reserva de memoria, per posar la resta del buffer
-	if(!resta) //si falla resta
-		(free(resta), resta = NULL, NULL); //retornar : la lliberacio de memo de resta, asigancio de resta = NULL, NULL
+	new_buffer = malloc(sizeof(char) * (ft_strlen(buffer) + 1));
+	if (!new_buffer)
+		return (free(buffer), buffer = NULL, NULL);
 	i++;
 	j = 0;
-	while (buffer[i] != '\0') //reiterem el buffer fins a trobar NULL
-		resta[j++] = buffer[i++]; //copiar el buffer dins del malloc
-	resta[i] = '\0'; //assingar el ultim char NULL
-	return (free(buffer), resta 0 NULL, resta);
+	while (buffer[i] != '\0')
+		new_buffer[j++] = buffer[i++];
+	new_buffer[j] = '\0';
+	return (free(buffer), buffer = NULL, new_buffer);
 }
