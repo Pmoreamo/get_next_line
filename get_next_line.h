@@ -3,32 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajordan- <ajordan-@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/30 10:55:47 by pmorello          #+#    #+#             */
-/*   Updated: 2024/04/13 14:19:32 by pmorello         ###   ########.fr       */
+/*   Created: 2021/08/16 10:12:35 by ajordan-          #+#    #+#             */
+/*   Updated: 2021/10/20 00:19:06 by ajordan-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-#endif
-
-//llibrerias
-# include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
-# include <fcntl.h>
 
-//funcions
-char	*ft_strchr(char *buffer, int c);
-char	*ft_strjoin(char *buffer, char *new_buffer);
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1000
+# endif
+
 char	*get_next_line(int fd);
-char    *ft_llegir_fd(int fd, char *buffer);
-char	*ft_llegir_linea(char *buffer);
-char	*ft_resta_fd(char *buffer);
- 
+char	*ft_read_to_left_str(int fd, char *left_str);
+char	*ft_strchr(char *s, int c);
+char	*ft_strjoin(char *left_str, char *buff);
+size_t	ft_strlen(char *s);
+char	*ft_get_line(char *left_str);
+char	*ft_new_left_str(char *left_str);
+
 #endif
