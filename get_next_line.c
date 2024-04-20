@@ -6,7 +6,7 @@
 /*   By: pmorello <pmorello@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 10:54:24 by pmorello          #+#    #+#             */
-/*   Updated: 2024/04/18 12:17:04 by pmorello         ###   ########.fr       */
+/*   Updated: 2024/04/20 10:22:37 by pmorello         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,23 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/* ft_read_fd, llegir dades del buffer
- ft_read_line, extrau una linea del buffer i la retorna
- ft_new_line, un cop extrau la linea segueix a la seguent linea
-
-   int main()
-    fd = open("archivo.txt", O_RDONLY);
+/* 
+int main()
+{
+	
+	int 	fd;
+	char	*line;
+	
+	line = get_next_line(fd);
+	fd = open("archivo.txt", O_RDONLY);
     if (fd == -1) 
     {
-        perror("Error al abrir el archivo");
-        return 1;
+        printf("Error al abrir el archivo");
+        return (0);
     }
-    char *line;
-    while ((line = get_next_line(fd)) != NULL) 
+    while ((line) != NULL) 
     {
-        printf("%s\n", line);
+        printf("%s", line);
         free(line);
     }
     close(fd);
